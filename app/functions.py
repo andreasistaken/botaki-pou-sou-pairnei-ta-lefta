@@ -1,14 +1,17 @@
 from typing import Union
 import requests as r
 
-def normalizeGithubLink(link: str) -> str:
-    if link.startswith("https://"):
-        return link
-    elif link.startswith("http://"):
-        link = link[7:]
-        return "https://" + link
-    elif not link.startswith("https://") or not link.startswith("http://"):
-        return "https://" + link
+def normalizeGithubLink(link: str) -> str: 
+    if "github.com" in link:
+        if link.startswith("https://"):
+            return link
+        elif link.startswith("http://"):
+            link = link[7:]
+            return "https://" + link
+        else:
+            return "https://" + link
+    else:
+        return "Invalid link"
 
 
 def repoExists(githubRepo: str) -> Union[bool, str]:

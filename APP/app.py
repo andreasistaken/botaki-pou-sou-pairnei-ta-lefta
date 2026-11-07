@@ -33,23 +33,15 @@ def test():
 def makeProject():
     data = request.get_json()
 
-    if data["name"] and data["deadline"] and data["description"] and data["repo"] and data["amount"]:
+    name = data.get("name")
+    deadline = data.get("deadline")
+    description = data.get("description")
+    repo = data.get("repo")
+    amount = data.get("amount")
 
-        if repoExists(data["repo"]):        
-            project = Project(name=data["name"], 
-                            deadline=data["deadline"],
-                            description=data["description"], 
-                            githubRepo=data["repo"], 
-                            amount=data["amount"], 
-                            BTCwallet="PLACEHOLDER"
-                            )
+    if name and deadline and description and repo and amount:
+        return jsonify({"ok": True})
 
-            
-            db.session.add(project)
-            db.session.commit()
-            return jsonify({"ok": True})
-        else:
-            return jsonify({"ok": False})
 
 if __name__ == "__main__":
     app.run(

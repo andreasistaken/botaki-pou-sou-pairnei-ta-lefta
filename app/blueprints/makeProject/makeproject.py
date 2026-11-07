@@ -18,3 +18,6 @@ def makeProject():
 
     if not all([name, deadline, description, repo, amount]):
         return jsonify({"ok": False, "error": "Missing fields"}), 400
+    else:
+        repo = normalizeGithubLink(repo)
+        return jsonify({"ok": True})

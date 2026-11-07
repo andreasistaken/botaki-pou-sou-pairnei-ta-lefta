@@ -21,3 +21,5 @@ def makeProject():
     else:
         repo = normalizeGithubLink(repo)
         return jsonify({"ok": True})
+    
+print("hello world!")

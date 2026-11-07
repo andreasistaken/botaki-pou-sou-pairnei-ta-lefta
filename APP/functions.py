@@ -1,13 +1,19 @@
 from typing import Union
 import requests as r
 
+def normalizeGithubLink(link: str) -> str:
+    if link.startswith("https://"):
+        return link
+    elif link.startswith("http://"):
+        link = link[7:]
+        return "https://" + link
+    elif not link.startswith("https://") or not link.startswith("http://"):
+        return "https://" + link
+
+
 def repoExists(githubRepo: str) -> Union[bool, str]:
-    if githubRepo.startswith("https://"):
-        githubRepo = githubRepo[19:]
-    elif githubRepo.startswith("http://"):
-        githubRepo = githubRepo[18:]
-    else:
-        githubRepo = githubRepo[11:]
+
+    githubRepo = githubRepo[19:]
 
     try:
         response = r.get(url=f"https://api.github.com/repos/{githubRepo}")
@@ -21,4 +27,7 @@ def repoExists(githubRepo: str) -> Union[bool, str]:
     else:
         return False
 
-repoExists("https://github.com/andreasistaken/test-repo")
+# repoExists("https://github.com/andreasistaken/test-repo")
+
+# normalLink = normalizeGithubLink("http://github.com/andreasistaken/test-repo")
+# print(normalLink)

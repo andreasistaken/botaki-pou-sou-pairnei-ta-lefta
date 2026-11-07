@@ -4,6 +4,8 @@ import requests as r
 def repoExists(githubRepo: str) -> Union[bool, str]:
     if githubRepo.startswith("https://"):
         githubRepo = githubRepo[19:]
+    elif githubRepo.startswith("http://"):
+        githubRepo = githubRepo[18:]
     else:
         githubRepo = githubRepo[11:]
 

@@ -1,7 +1,6 @@
-from flask import Blueprint, request, jsonify
-from sqlalchemy.exc import IntegrityError
-from extensions import db
-from models import Project
+from flask import jsonify, Blueprint, request
+from app.extensions import db
+from app.models import Project
 from app.blueprints.makeProject.functions import normalizeGithubLink, repoExists, TimeFormatGood
      
 makeProject_bp = Blueprint("makeProject_bp", __name__)

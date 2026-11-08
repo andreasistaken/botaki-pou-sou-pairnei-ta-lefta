@@ -1,6 +1,6 @@
 from flask import Flask
-from extensions import db
-from blueprints.makeProject.makeproject import makeProject_bp
+from app.extensions import db
+from app.blueprints.makeProject.makeproject import makeProject_bp
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 app.register_blueprint(makeProject_bp)
 
-import models  
+import app.models  
 with app.app_context():
     db.create_all()
 

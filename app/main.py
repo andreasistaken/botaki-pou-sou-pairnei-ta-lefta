@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 app.register_blueprint(makeProject_bp)
 
-import models  # make sure the models are registered before create_all
+import models  
 with app.app_context():
     db.create_all()
 

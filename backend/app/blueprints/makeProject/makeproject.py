@@ -1,7 +1,7 @@
 from flask import jsonify, Blueprint, request
-from app.extensions import db
-from app.models import Project
-from app.blueprints.makeProject.functions import normalizeGithubLink, repoExists, TimeFormatGood
+from backend.app.extensions import db
+from backend.app.models import Project
+from backend.app.blueprints.makeProject.functions import normalizeGithubLink, repoExists, TimeFormatGood
      
 makeProject_bp = Blueprint("makeProject_bp", __name__)
     

@@ -1,8 +1,8 @@
 from flask import Flask
-from app.extensions import db
-from app.blueprints.makeProject.makeproject import makeProject_bp
+from backend.app.extensions import db, cors
+from backend.app.blueprints.makeProject.makeproject import makeProject_bp
 
-from app.config import config
+from backend.app.config import config
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -11,9 +11,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.ensure_ascii = False
 
 db.init_app(app)
+cors.init_app(app)
 app.register_blueprint(makeProject_bp)
 
-from app import models
+from backend.app import models
 with app.app_context():
     db.create_all()
 

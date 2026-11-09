@@ -10,7 +10,8 @@ const form = reactive({
   amount: ''
 })
 
-async function handleSubmit(){
+async function handleSubmit() {
+  
 
   try {
     const response = await axios.post(
@@ -29,6 +30,7 @@ async function handleSubmit(){
     console.error(error);
   }
 
+  console.log(form.deadline)
 }
 </script>
 
@@ -46,7 +48,7 @@ async function handleSubmit(){
 
       <div class="flex flex-col gap-1">
         <label for="deadline">Deadline</label>
-        <input id="deadline" type="date" v-model="form.deadline" />
+        <input id="deadline" type="date"  v-model="form.deadline" />
       </div>
 
       <div class="flex flex-col gap-1">
@@ -69,7 +71,8 @@ async function handleSubmit(){
       </div>
 
       <div class="flex justify-end mt-2">
-        <button type="submit">Submit</button>
+        <button class="text-white bg-blue-600 px-2 py-1 
+        rounded-lg hover:bg-blue-700 hover:cursor-pointer" type="submit">Submit</button>
       </div>
 
     </form>

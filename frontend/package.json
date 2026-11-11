@@ -11,7 +11,8 @@
   "dependencies": {
     "axios": "^1.21.0",
     "vue": "^3.5.44",
-    "vue-axios": "^3.6.0"
+    "vue-axios": "^3.6.0",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",

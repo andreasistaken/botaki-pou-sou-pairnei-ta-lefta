@@ -19,15 +19,19 @@ def makeProject():
         return jsonify({"ok": False, "error": "Missing fields"}), 400
     else:
         if not repoExists(repo):
-            return jsonify({"ok": False, "error-en": "Couldn't find repo", "error-gr": r"Δεν βρεθηκε το repository"})
-
+            return jsonify({"ok": False, 
+                            "error": "Couldn't find repo"
+                            })
+        
         if not TimeFormatGood(deadline):
-            return jsonify({"ok": False, "error-en": "Deadline should follow this format: %d-%m-%Y %H:%M:%S", 
-                                          "error-gr": "Η ημερομηνια ληξης πρεπει να ακολουθει αυτο το format: %d-%m-%Y %H:%M:%S"
-                                          })
-        print(deadline)
+            return jsonify({"ok": False, 
+                            "error": "Deadline should follow this format: %d-%m-%Y %H:%M:%S"
+                            })
+
+        if not len(description) > 100:
+            return jsonify({"ok": False,
+                            "error": "Description too short.",
+                            "length": len(description)
+                            })
 
         return jsonify({"ok": True})
-        
-        
-        # return jsonify({"ok": True})

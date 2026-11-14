@@ -25,49 +25,25 @@ def repoExists(githubRepo: str) -> Union[bool, str]:
     except r.exceptions.ConnectionError:
         return "Connection error"
 
-    print(f"Status code: {response.status_code}")
+    # print(f"Status code: {response.status_code}")
 
     if response.status_code == 200:
         return True
     else:
         return False
 
-def TimeFormatGood(time):
+def TimeFormatGood(time: str) -> bool:
         format = "%d-%m-%Y %H:%M:%S"
 
         try:
             datetime.strptime(time, format)
-            print("True")
+            # print("True")
             return True
         except ValueError:
-            print("False")
+            # print("False")
             return False
 
 
-
-def time(date):
-    class TimeLeft:
-        def __init__(self, difference, days, hours, minutes, seconds):
-            self.difference = difference
-            self.days = days
-            self.hours = hours
-            self.minutes = minutes
-            self.seconds = seconds
-
-    date = datetime.strptime(date, "%d-%m-%Y %H:%M:%S")
-
-    now = datetime.now()
-
-    difference = date - now
-
-    days = difference.days
-    hours = difference.seconds // 3600
-    minutes = (difference.seconds % 3600) // 60
-    seconds = difference.seconds % 60
-
-    timer = TimeLeft(difference, days, hours, minutes, seconds)
-
-    return timer
 
 
 # checkTimeFormat("30-11-2026 22:23:24")

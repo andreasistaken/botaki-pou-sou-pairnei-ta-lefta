@@ -16,22 +16,36 @@ def makeProject():
     amount = data.get("amount")
          
     if not all([name, deadline, description, repo, amount]):
-        return jsonify({"ok": False, "error": "Missing fields"}), 400
+        return jsonify({"ok": False, "error": "Missing fields", "success-message": None}), 400
     else:
         if not repoExists(repo):
             return jsonify({"ok": False, 
-                            "error": "Couldn't find repo"
+                            "error": "Couldn't find repo",
+                            "success-message": None
                             })
         
         if not TimeFormatGood(deadline):
             return jsonify({"ok": False, 
-                            "error": "Deadline should follow this format: %d-%m-%Y %H:%M:%S"
+                            "error": "Deadline should follow this format: %d-%m-%Y %H:%M:%S",
+                            "success-message": None
                             })
 
-        if not len(description) > 100:
+        if not len(description) > 46:
             return jsonify({"ok": False,
                             "error": "Description too short.",
+                            "success-message": None,
                             "length": len(description)
                             })
+        if not int(amount) > 0:
+            return jsonify({"ok": True,
+                            "error": "Amount needs to be a positive value",
+                            "success-message": None
+                            })
 
-        return jsonify({"ok": True})
+        project = Project(name=name, deadline=deadline, description=description, githubRepo=repo, amount=amount)
+        db.session.add(project)
+        db.session.commit()
+        
+        return jsonify({"ok": True,
+                        "error": None,
+                        "success-message": "Project was successfully created."})
